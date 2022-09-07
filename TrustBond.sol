@@ -27,7 +27,7 @@ contract TrustBond {
     );
 
     constructor() {
-        admin = msg.sender;
+        admin = payable(msg.sender);
     }
 
     /// @dev checks if caller is the admin
@@ -93,7 +93,7 @@ contract TrustBond {
     }
 
     /// @dev User confirms they have completed their part of deal
-    function makeConfirmation(uint256 _bondId) public {
+    function makeConfirmation(uint256 _bondId) public payable {
         Bond storage bond = bonds[_bondId];
         require(bond.signed == true, "Bond not signed yet");
         require(bond.validated = true, "Bond not validated yet");
